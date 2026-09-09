@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Training and evaluation outputs
+artifacts/*
+!artifacts/.gitkeep
+reports/*
+!reports/.gitkeep
+
+# Local/editor files
+.env
+.vscode/
+.idea/
+
+# React build output
+frontend/node_modules/
+frontend/dist/
+
+# Datasets (too large / not redistributable via git)
+food-101/
+*.zip
+data/
+datasets/
+*.tar
+*.tar.gz
+
+# Model checkpoints / weights
+*.pt
+*.pth
+*.onnx
+*.ckpt

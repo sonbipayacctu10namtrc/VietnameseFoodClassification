@@ -1,0 +1,35 @@
+# Supplemental Cookpad searches for P0 classes that returned fewer than 30 images.
+# These use accented Vietnamese terms because Cookpad's search is accent-sensitive.
+bo_kho	https://cookpad.com/vn/tim-kiem/bò%20kho
+bo_kho	https://cookpad.com/vn/tim-kiem/cách%20nấu%20bò%20kho
+bo_kho	https://cookpad.com/vn/tim-kiem/bò%20kho%20bánh%20mì
+ca_kho_to	https://cookpad.com/vn/tim-kiem/cá%20kho%20tộ
+ca_kho_to	https://cookpad.com/vn/tim-kiem/cá%20kho%20tiêu
+ca_kho_to	https://cookpad.com/vn/tim-kiem/cá%20kho%20tộ%20miền%20nam
+cao_lau	https://cookpad.com/vn/tim-kiem/cao%20lầu
+cao_lau	https://cookpad.com/vn/tim-kiem/cao%20lầu%20hội%20an
+cao_lau	https://cookpad.com/vn/tim-kiem/mì%20cao%20lầu
+cha_ca_la_vong	https://cookpad.com/vn/tim-kiem/chả%20cá%20lã%20vọng
+cha_ca_la_vong	https://cookpad.com/vn/tim-kiem/chả%20cá%20hà%20nội
+cha_ca_la_vong	https://cookpad.com/vn/tim-kiem/chả%20cá%20lăng
+chao_tom	https://cookpad.com/vn/tim-kiem/chạo%20tôm
+chao_tom	https://cookpad.com/vn/tim-kiem/chạo%20tôm%20huế
+chao_tom	https://cookpad.com/vn/tim-kiem/tôm%20quấn%20mía
+com_nieu	https://cookpad.com/vn/tim-kiem/cơm%20niêu
+com_nieu	https://cookpad.com/vn/tim-kiem/cơm%20niêu%20việt%20nam
+com_nieu	https://cookpad.com/vn/tim-kiem/cơm%20niêu%20gà
+lau_de	https://cookpad.com/vn/tim-kiem/lẩu%20dê
+lau_de	https://cookpad.com/vn/tim-kiem/lẩu%20dê%20thuốc%20bắc
+lau_de	https://cookpad.com/vn/tim-kiem/lẩu%20dê%20nấu%20chao
+lau_ga_la_e	https://cookpad.com/vn/tim-kiem/lẩu%20gà%20lá%20é
+lau_ga_la_e	https://cookpad.com/vn/tim-kiem/gà%20lá%20é
+lau_ga_la_e	https://cookpad.com/vn/tim-kiem/lẩu%20gà%20lá%20é%20đà%20lạt
+lau_mam	https://cookpad.com/vn/tim-kiem/lẩu%20mắm
+lau_mam	https://cookpad.com/vn/tim-kiem/lẩu%20mắm%20miền%20tây
+lau_mam	https://cookpad.com/vn/tim-kiem/lẩu%20mắm%20cá%20linh
+nem_lui	https://cookpad.com/vn/tim-kiem/nem%20lụi
+nem_lui	https://cookpad.com/vn/tim-kiem/nem%20lụi%20huế
+nem_lui	https://cookpad.com/vn/tim-kiem/nem%20lụi%20sả
+nem_nuong	https://cookpad.com/vn/tim-kiem/nem%20nướng
+nem_nuong	https://cookpad.com/vn/tim-kiem/nem%20nướng%20nha%20trang
+nem_nuong	https://cookpad.com/vn/tim-kiem/nem%20nướng%20cuốn

@@ -1,0 +1,33 @@
+# Starter seed pages for the 30 P0 Vietnamese food classes.
+# Format: canonical_label<TAB>seed URL
+# Review the returned images and licenses before training.
+banh_mi	https://commons.wikimedia.org/w/index.php?search=banh+mi+Vietnamese&title=Special:MediaSearch&type=image
+bun_bo_hue	https://commons.wikimedia.org/w/index.php?search=bun+bo+hue&title=Special:MediaSearch&type=image
+bun_cha	https://commons.wikimedia.org/w/index.php?search=bun+cha+Vietnamese&title=Special:MediaSearch&type=image
+bun_rieu	https://commons.wikimedia.org/w/index.php?search=bun+rieu+Vietnamese&title=Special:MediaSearch&type=image
+bun_thit_nuong	https://commons.wikimedia.org/w/index.php?search=bun+thit+nuong&title=Special:MediaSearch&type=image
+bun_dau_mam_tom	https://commons.wikimedia.org/w/index.php?search=bun+dau+mam+tom&title=Special:MediaSearch&type=image
+bun_mam	https://commons.wikimedia.org/w/index.php?search=bun+mam+Vietnamese&title=Special:MediaSearch&type=image
+bun_oc	https://commons.wikimedia.org/w/index.php?search=bun+oc+Vietnamese&title=Special:MediaSearch&type=image
+bun_moc	https://commons.wikimedia.org/w/index.php?search=bun+moc+Vietnamese&title=Special:MediaSearch&type=image
+mi_quang	https://commons.wikimedia.org/w/index.php?search=mi+quang&title=Special:MediaSearch&type=image
+cao_lau	https://commons.wikimedia.org/w/index.php?search=cao+lau+Hoi+An&title=Special:MediaSearch&type=image
+hu_tieu	https://commons.wikimedia.org/w/index.php?search=hu+tieu+Vietnamese&title=Special:MediaSearch&type=image
+banh_canh	https://commons.wikimedia.org/w/index.php?search=banh+canh+Vietnamese&title=Special:MediaSearch&type=image
+banh_da_cua	https://commons.wikimedia.org/w/index.php?search=banh+da+cua&title=Special:MediaSearch&type=image
+com_tam	https://commons.wikimedia.org/w/index.php?search=com+tam+Vietnamese&title=Special:MediaSearch&type=image
+com_ga_hoi_an	https://commons.wikimedia.org/w/index.php?search=Hoi+An+chicken+rice&title=Special:MediaSearch&type=image
+com_hen	https://commons.wikimedia.org/w/index.php?search=com+hen+Hue&title=Special:MediaSearch&type=image
+com_nieu	https://commons.wikimedia.org/w/index.php?search=com+nieu+Vietnamese&title=Special:MediaSearch&type=image
+bo_kho	https://commons.wikimedia.org/w/index.php?search=bo+kho+Vietnamese&title=Special:MediaSearch&type=image
+bo_luc_lac	https://commons.wikimedia.org/w/index.php?search=bo+luc+lac&title=Special:MediaSearch&type=image
+bo_nhung_dam	https://commons.wikimedia.org/w/index.php?search=bo+nhung+dam&title=Special:MediaSearch&type=image
+thit_kho_trung	https://commons.wikimedia.org/w/index.php?search=thit+kho+trung&title=Special:MediaSearch&type=image
+ca_kho_to	https://commons.wikimedia.org/w/index.php?search=ca+kho+to&title=Special:MediaSearch&type=image
+cha_ca_la_vong	https://commons.wikimedia.org/w/index.php?search=cha+ca+La+Vong&title=Special:MediaSearch&type=image
+nem_nuong	https://commons.wikimedia.org/w/index.php?search=nem+nuong+Vietnamese&title=Special:MediaSearch&type=image
+nem_lui	https://commons.wikimedia.org/w/index.php?search=nem+lui+Hue&title=Special:MediaSearch&type=image
+chao_tom	https://commons.wikimedia.org/w/index.php?search=chao+tom+Vietnamese&title=Special:MediaSearch&type=image
+lau_mam	https://commons.wikimedia.org/w/index.php?search=lau+mam+Vietnamese&title=Special:MediaSearch&type=image
+lau_ga_la_e	https://commons.wikimedia.org/w/index.php?search=lau+ga+la+e&title=Special:MediaSearch&type=image
+lau_de	https://commons.wikimedia.org/w/index.php?search=lau+de+Vietnamese&title=Special:MediaSearch&type=image

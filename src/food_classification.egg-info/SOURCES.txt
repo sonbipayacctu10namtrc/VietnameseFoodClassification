@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+src/food_classification.egg-info/PKG-INFO
+src/food_classification.egg-info/SOURCES.txt
+src/food_classification.egg-info/dependency_links.txt
+src/food_classification.egg-info/requires.txt
+src/food_classification.egg-info/top_level.txt
+src/food_classifier/__init__.py
