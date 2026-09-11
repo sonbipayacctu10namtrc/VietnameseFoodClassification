@@ -9,6 +9,7 @@ venv/
 # Training and evaluation outputs
 artifacts/*
 !artifacts/.gitkeep
+!artifacts/vietnamese_food_expanded
 reports/*
 !reports/.gitkeep
 
