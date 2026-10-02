@@ -6,12 +6,9 @@ __pycache__/
 .venv/
 venv/
 
-# Training and evaluation outputs
+# Training and evaluation outputs (ảnh, metadata, manifest, checkpoint chỉ giữ ở máy)
 artifacts/*
 !artifacts/.gitkeep
-!artifacts/vietnamese_food_expanded
-# Ảnh crawl có bản quyền của người khác: chỉ giữ manifest/metadata trên git
-artifacts/vietnamese_food_expanded/images/
 reports/*
 !reports/.gitkeep
 
@@ -20,6 +17,13 @@ reports/*
 .env.crawler
 .vscode/
 .idea/
+.claude/
+
+# Báo cáo thực tập / báo cáo tuần (chỉ giữ ở máy)
+BAO_CAO_*.md
+bao_cao_thuc_tap/
+*.doc
+*.docx
 
 # React build output
 frontend/node_modules/

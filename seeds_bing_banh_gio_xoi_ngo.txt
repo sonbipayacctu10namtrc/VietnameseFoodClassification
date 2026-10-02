@@ -1,8 +1,0 @@
-banh_gio	https://www.bing.com/images/search?q=banh+gio+Vietnamese+street+food
-banh_gio	https://www.bing.com/images/search?q=banh+gio+recipe
-banh_gio	https://www.bing.com/images/search?q=Vietnamese+pork+rice+flour+dumpling
-banh_gio	https://www.bing.com/images/search?q=bánh+giò+quán+Hà+Nội
-banh_gio	https://www.bing.com/images/search?q=site%3Acooky.vn+bánh+giò
-banh_gio	https://www.bing.com/images/search?q=site%3Adienmayxanh.com+bánh+giò
-xoi_ngo	https://www.bing.com/images/search?q=xôi+bắp+lá+chuối
-xoi_ngo	https://www.bing.com/images/search?q=Vietnamese+corn+sticky+rice+dessert

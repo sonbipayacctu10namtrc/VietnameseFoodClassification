@@ -9,8 +9,14 @@ USAGE ON KAGGLE
 3. Paste this whole file into one cell, set DATA_ROOT to the mounted path
    (e.g. /kaggle/input/vietnamese-food-clean), and Run. Outputs go to /kaggle/working.
 
-It reads the leakage-aware manifests so the split matches local experiments. If the
-manifests are absent it falls back to a stratified per-class random split.
+It reads the leakage-aware manifests so the split matches local experiments. Without
+manifests it looks for a Train/Validate/Test folder layout and uses that published split;
+failing both, it falls back to a stratified per-class random split.
+
+30VNFOODS BENCHMARK (compare against the paper: 77.54% top-1 / 96.07% top-5 on its Test split)
+    Add Data -> search "quandang/vietnamese-foods", set DATA_ROOT to its mount
+    (e.g. /kaggle/input/vietnamese-foods). The script finds Train/Validate/Test itself and
+    evaluates on the untouched Test folder.
 """
 
 from __future__ import annotations
@@ -23,7 +29,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from PIL import Image
+from PIL import Image, ImageFile
 from torch import nn
 from torch.optim import AdamW
 from torch.optim.lr_scheduler import CosineAnnealingLR
@@ -42,6 +48,7 @@ NUM_WORKERS = 2
 PATIENCE = 8                   # early-stop if val top1 does not improve for this many epochs
 SEED = 42
 # -----------------------------------------------------------------------------
+ImageFile.LOAD_TRUNCATED_IMAGES = True  # web-scraped datasets (e.g. 30VNFoods) contain a few truncated JPEGs
 
 
 def set_seed(seed: int) -> None:
@@ -114,8 +121,59 @@ class ManifestDataset(Dataset):
         return self.transform(im), int(row["class_id"])
 
 
+IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
+SPLIT_DIR_NAMES = {"train": ("train", "training"), "validation": ("validate", "validation", "val", "valid"),
+                   "test": ("test", "testing")}
+
+
+def find_split_dirs(data_root: Path) -> dict[str, Path] | None:
+    """Locate a published Train/Validate/Test folder layout (e.g. 30VNFoods) up to 3 levels deep."""
+    candidates = [data_root] + [p for p in sorted(data_root.glob("*/")) if p.is_dir()] \
+        + [p for p in sorted(data_root.glob("*/*/")) if p.is_dir()]
+    for parent in candidates:
+        children = {c.name.lower(): c for c in parent.iterdir() if c.is_dir()}
+        found = {split: next((children[n] for n in names if n in children), None)
+                 for split, names in SPLIT_DIR_NAMES.items()}
+        if found["train"] is not None and found["test"] is not None:
+            return {split: path for split, path in found.items() if path is not None}
+    return None
+
+
+def rows_from_split_dirs(data_root: Path, split_dirs: dict[str, Path]):
+    """Use the dataset's own split so results are comparable with its published numbers."""
+    classes = sorted(p.name for p in split_dirs["train"].iterdir() if p.is_dir())
+    cid = {c: i for i, c in enumerate(classes)}
+    splits = {}
+    for split, folder in split_dirs.items():
+        rows = []
+        for class_dir in sorted(p for p in folder.iterdir() if p.is_dir()):
+            if class_dir.name not in cid:
+                raise ValueError(f"class {class_dir.name!r} in {split} is missing from train")
+            for f in sorted(class_dir.rglob("*")):
+                if f.suffix.lower() in IMAGE_EXTENSIONS:
+                    rows.append({"relative_path": f.relative_to(data_root).as_posix(),
+                                 "class_name": class_dir.name, "class_id": cid[class_dir.name]})
+        splits[split] = rows
+    if "validation" not in splits:
+        # Carve validation out of train (never out of test) so the official test split stays untouched.
+        import random
+        rng = random.Random(SEED); train = splits["train"][:]; rng.shuffle(train)
+        by_class: dict[int, list[dict]] = {}
+        for r in train:
+            by_class.setdefault(r["class_id"], []).append(r)
+        splits["train"], splits["validation"] = [], []
+        for rows in by_class.values():
+            k = max(1, int(len(rows) * 0.1))
+            splits["validation"] += rows[:k]; splits["train"] += rows[k:]
+    return splits["train"], splits["validation"], splits["test"], classes
+
+
 def load_splits(data_root: Path):
-    """Read manifests if present; else stratified per-class 70/15/15 split of images/."""
+    """Read manifests; else a Train/Validate/Test folder layout; else stratified 70/15/15 of images/."""
+    split_dirs = None if (data_root / "manifests" / "train.csv").exists() else find_split_dirs(data_root)
+    if split_dirs:
+        print("using folder splits:", {k: str(v) for k, v in split_dirs.items()})
+        return rows_from_split_dirs(data_root, split_dirs)
     manifests = data_root / "manifests"
     if (manifests / "train.csv").exists():
         def read(name):
@@ -221,7 +279,9 @@ def main():
     tm, cm = run_epoch(model, tsl, criterion, device, None, scaler, num_classes, cm=True)
     cmf = cm.float(); rec = torch.diag(cmf) / cmf.sum(1).clamp(min=1)
     prec = torch.diag(cmf) / cmf.sum(0).clamp(min=1); f1 = 2 * prec * rec / (prec + rec).clamp(min=1e-9)
-    summary = {"model": MODEL, "classes": num_classes, "best_val_top1": best,
+    summary = {"model": MODEL, "data_root": str(DATA_ROOT), "image_size": IMAGE_SIZE,
+               "split_sizes": {"train": len(train_rows), "validation": len(val_rows), "test": len(test_rows)},
+               "classes": num_classes, "best_val_top1": best,
                "test_top1": tm["top1"], "test_top5": tm["top5"], "macro_f1": f1.mean().item(),
                "elapsed_minutes": (time.perf_counter() - started) / 60,
                "per_class_test_recall": dict(sorted({classes[i]: rec[i].item() for i in range(num_classes)}.items(),

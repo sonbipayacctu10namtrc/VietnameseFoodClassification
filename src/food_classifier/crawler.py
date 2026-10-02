@@ -147,9 +147,18 @@ async def _get_with_retry(
     max_retries: int = 4,
 ) -> Any:
     """Retry transient CDN failures while honoring Retry-After when provided."""
+    import httpx
+
     response = None
     for attempt in range(max_retries + 1):
-        response = await client.get(url, headers=headers, params=params)
+        try:
+            response = await client.get(url, headers=headers, params=params)
+        except httpx.RequestError:
+            # Transient network/timeout error (no HTTP response): back off and retry.
+            if attempt == max_retries:
+                raise
+            await asyncio.sleep(min(5 * (2**attempt), 40))
+            continue
         if response.status_code not in {429, 502, 503, 504}:
             return response
         if attempt == max_retries:
@@ -322,10 +331,12 @@ async def _download(client: Any, candidates: Iterable[SourceImage], output_dir: 
     root.mkdir(parents=True, exist_ok=True)
     manifest_path = output_dir / "metadata.jsonl"
     records = [json.loads(line) for line in manifest_path.read_text(encoding="utf-8").splitlines() if line] if manifest_path.exists() else []
-    hashes = {record["sha256"] for record in records}
+    # Records may come from another pipeline (e.g. the CLIP-expanded set) whose
+    # schema omits image_url/alt/etc.; dedup only needs sha256 + perceptual_hash.
+    hashes = {record["sha256"] for record in records if record.get("sha256")}
     perceptual_hashes = {record["perceptual_hash"] for record in records if record.get("perceptual_hash")}
-    known_urls = {record["image_url"] for record in records}
-    class_counts: Counter[str] = Counter(record["canonical_label"] for record in records)
+    known_urls = {record["image_url"] for record in records if record.get("image_url")}
+    class_counts: Counter[str] = Counter(record["canonical_label"] for record in records if record.get("canonical_label"))
     async def fetch(candidate: SourceImage) -> tuple[bytes, int, int]:
         url = _normalize_image_url(candidate.image_url)
         headers = {

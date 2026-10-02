@@ -57,6 +57,33 @@ Checkpoint, manifests và lịch sử metrics được lưu tại `artifacts/res
 python scripts/evaluate.py --checkpoint artifacts/resnet18_10class/best.pt --output-dir artifacts/resnet18_10class/evaluation
 ```
 
+## Benchmark bộ món Việt
+
+Bộ dữ liệu mở rộng hiện có 50 lớp, với split chống rò rỉ tại `artifacts/vietnamese_food_expanded/manifests/`. Chọn kiến trúc và siêu tham số trên validation; chỉ chạy test sau khi đã chốt cấu hình.
+
+Chạy baseline nhãn (majority class) trên validation:
+
+```powershell
+$env:PYTHONPATH = "src"
+python scripts/benchmark_vietnamese.py --num-workers 0
+```
+
+Huấn luyện các model cần so sánh trên chính manifest 50 lớp:
+
+```powershell
+python scripts/train_vietnamese.py --data-root artifacts/vietnamese_food_expanded --output-dir artifacts/vietnamese_resnet18_50
+python scripts/train_vietnamese.py --data-root artifacts/vietnamese_food_expanded --model efficientnet_b0 --output-dir artifacts/vietnamese_efficientnet_b0_50
+```
+
+So sánh checkpoint trên validation, sau đó đánh giá checkpoint tốt nhất đúng một lần trên test:
+
+```powershell
+python scripts/benchmark_vietnamese.py --checkpoint artifacts/vietnamese_resnet18_50/best.pt --checkpoint artifacts/vietnamese_efficientnet_b0_50/best.pt
+python scripts/benchmark_vietnamese.py --split test --checkpoint artifacts/vietnamese_efficientnet_b0_50/best.pt
+```
+
+Kết quả được lưu ở `artifacts/vietnamese_benchmark/` dưới dạng CSV và JSON. Checkpoint phải có cùng danh sách 50 lớp và thứ tự lớp với manifest.
+
 ## Training dashboard
 
 Mở dashboard local để xem loss, accuracy, checkpoint và kết quả test:

@@ -1,9 +1,0 @@
-# Final raw-image fill for P0 classes with too few unique Cookpad recipes.
-cao_lau	https://www.bing.com/images/search?q=cao+lầu+Hội+An+món+ăn
-cao_lau	https://www.bing.com/images/search?q=Vietnamese+cao+lau+noodles
-com_nieu	https://www.bing.com/images/search?q=cơm+niêu+Việt+Nam+món+ăn
-com_nieu	https://www.bing.com/images/search?q=cơm+niêu+đất
-com_nieu	https://www.bing.com/images/search?q=Vietnamese+clay+pot+rice
-lau_de	https://www.bing.com/images/search?q=lẩu+dê+Việt+Nam
-lau_de	https://www.bing.com/images/search?q=lẩu+dê+thuốc+bắc
-lau_de	https://www.bing.com/images/search?q=Vietnamese+goat+hotpot
