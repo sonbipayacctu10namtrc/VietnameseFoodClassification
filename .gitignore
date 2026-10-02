@@ -10,11 +10,14 @@ venv/
 artifacts/*
 !artifacts/.gitkeep
 !artifacts/vietnamese_food_expanded
+# Ảnh crawl có bản quyền của người khác: chỉ giữ manifest/metadata trên git
+artifacts/vietnamese_food_expanded/images/
 reports/*
 !reports/.gitkeep
 
 # Local/editor files
 .env
+.env.crawler
 .vscode/
 .idea/
 
@@ -35,3 +38,6 @@ datasets/
 *.pth
 *.onnx
 *.ckpt
+
+# Build metadata
+*.egg-info/
