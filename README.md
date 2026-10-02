@@ -6,14 +6,13 @@ Pipeline huấn luyện và web demo local để phân loại một món ăn tro
 
 Đang xây dựng theo từng bước. Dataset gốc nằm tại `food-101/` và luôn được giữ nguyên.
 
-Kế hoạch chi tiết: [PLAN.md](PLAN.md).
+Kế hoạch chi tiết: [PLAN.md](PLAN.md). Thu thập ảnh món Việt: [CRAWLER.md](CRAWLER.md).
 
 ## Cấu trúc dự án
 
 ```text
 food-101/                  # Dataset gốc, không chỉnh sửa
 src/food_classifier/       # Mã nguồn Python
-configs/                   # Cấu hình train/evaluate/serve
 scripts/                   # Entry point cho các workflow
 tests/                     # Automated tests
 artifacts/                 # Manifest, checkpoint, model export (git-ignored)
